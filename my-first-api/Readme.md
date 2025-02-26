@@ -16,6 +16,7 @@ Create an API that accept request at "/" and "/about"
 ```
 # Result
 ![Alt text](./output.jpg)
+![Alt text](./aboutpage.jpg)
 
 ```go
 func main() {
