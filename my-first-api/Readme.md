@@ -1,4 +1,4 @@
-# Problem: Create an API using Go (Golang)
+# Create an API using Go (Golang)
 
 ```markdown
 
