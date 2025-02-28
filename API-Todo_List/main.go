@@ -13,6 +13,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
+	"strings"
 )
 
 // create a structure that holds the To-do content
@@ -71,6 +73,38 @@ func listHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(todos)
 }
 
+// searchHandler function
+func searchHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, "Invalid: Only GET requests are allowed", http.StatusMethodNotAllowed)
+		return
+	}
+	//extract the ID from the URL path
+	pathParts := strings.Split(r.URL.Path, "/")
+	if len(pathParts) < 3 {
+		http.Error(w, "Invalid task ID", http.StatusBadRequest)
+		return
+	}
+
+	//convert the string ID to integer
+	id, err := strconv.Atoi(pathParts[2])
+	if err != nil {
+		http.Error(w, "Invalid request: Task ID must be a number", http.StatusBadRequest)
+		return
+	}
+	//search the task
+	for _, todo := range todos {
+		if todo.ID == id {
+			w.Header().Set("Content-Type", "application/json")
+			json.NewEncoder(w).Encode(todo)
+			return
+		}
+	}
+	// If no task is found, return 404
+	http.Error(w, "Task not found", http.StatusNotFound)
+
+}
+
 func main() {
 	// Serve static files (HTML, JS)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
@@ -80,14 +114,14 @@ func main() {
 		http.ServeFile(w, r, "static/index.html")
 	})
 
-	//handler to display the home page
-	//http.HandleFunc("/", homeHandler)
-
 	//handler to create a new To-Do
 	http.HandleFunc("/create", createHandler)
 
 	//handler to list the To-Dos
 	http.HandleFunc("/list", listHandler)
+
+	//handler to search the To-Dos
+	http.HandleFunc("/search/", searchHandler)
 
 	// Start the server
 	fmt.Println("✅ Server is running at http://localhost:8080")
