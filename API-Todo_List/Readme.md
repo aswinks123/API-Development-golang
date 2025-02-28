@@ -18,7 +18,8 @@ Delete a task ❌
 
 📂 Project Structure
 
-<Add project structure image>
+![alt text](image.png)
+
 todo-list-api
 ├── static/           # Frontend assets (HTML, JS, CSS)
 │   ├── index.html    # Web interface for managing To-Dos
@@ -38,8 +39,6 @@ Steps to Run
 
 
 1. Clone the Repository
-git clone https://github.com/your-username/todo-list-api.git
-cd todo-list-api
 2. Run the Server
 go run main.go
 3. Open your browser and go to:
