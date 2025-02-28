@@ -96,13 +96,46 @@ func searchHandler(w http.ResponseWriter, r *http.Request) {
 	for _, todo := range todos {
 		if todo.ID == id {
 			w.Header().Set("Content-Type", "application/json")
-			json.NewEncoder(w).Encode(todo)
+			json.NewEncoder(w).Encode(todos)
 			return
 		}
 	}
 	// If no task is found, return 404
 	http.Error(w, "Task not found", http.StatusNotFound)
 
+}
+
+// markComplete handler function
+func markCompleteHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPut {
+		http.Error(w, "Invalid: Only PUT requests are allowed", http.StatusMethodNotAllowed)
+		return
+	}
+	//Extract the ID from URLK
+	pathParts := strings.Split(r.URL.Path, "/")
+	if len(pathParts) < 3 {
+		http.Error(w, "Invalid task ID", http.StatusBadRequest)
+		return
+	}
+
+	//convert ID from string to interger
+	id, err := strconv.Atoi(pathParts[2])
+	if err != nil {
+		http.Error(w, "Invalid request. Task ID must be a number", http.StatusBadRequest)
+		return
+	}
+
+	//find and update the list element as completed
+	for i, todo := range todos {
+		if todo.ID == id {
+			todos[i].Completed = true
+			//Respond with the updated list
+			w.Header().Set("Content-Type", "applicaion/json")
+			json.NewEncoder(w).Encode(todos[i])
+			fmt.Print("✅ Task Marked as Completed: %+v\n", todos[i])
+			return
+		}
+	}
 }
 
 func main() {
@@ -122,6 +155,9 @@ func main() {
 
 	//handler to search the To-Dos
 	http.HandleFunc("/search/", searchHandler)
+
+	//handler to mark a todo as completed
+	http.HandleFunc("/complete/", markCompleteHandler)
 
 	// Start the server
 	fmt.Println("✅ Server is running at http://localhost:8080")
