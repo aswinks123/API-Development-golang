@@ -44,6 +44,7 @@ go run main.go
 3. Open your browser and go to:
 http://localhost:8080
 
+![alt text](image-1.png)
 
 🔗 API Endpoints
 
@@ -52,23 +53,30 @@ http://localhost:8080
 Endpoint: POST /create
 
 Request Body:
+```go
 {
   "task": "Learn Go",
   "completed": false
 }
+```
 
 Response:
+```go
 {
  "id": 1,
   "task": "Learn Go",
   "completed": false
 }
+```
+![alt text](image-2.png)
+
 
 2️⃣ List All Tasks
 
 Endpoint: GET /list
 
 Response:
+```go
 [
   {
     "id": 1,
@@ -76,37 +84,56 @@ Response:
     "completed": false
   }
 ]
+```
+![alt text](image-3.png)
+
 
 3️⃣ Search for a Task by ID
 
 Endpoint: GET /task/{id}
 
 Response:
+```go
 {
   "id": 1,
   "task": "Learn Go",
   "completed": false
 }
+```
+
+![alt text](image-4.png)
+
 
 4️⃣ Mark a Task as Completed
 Endpoint: PUT /update/{id}
 
 Response:
+```go
 {
   "id": 1,
   "task": "Learn Go",
   "completed": true
 }
+```
+
+![alt text](image-5.png)
+
+![alt text](image-6.png)
 
 5️⃣ Delete a Task
 
 Endpoint: DELETE /delete/{id}
 
 Response:
+```go
 {
   "message": "Task deleted successfully"
 }
+```
 
+![alt text](image-7.png)
+
+![alt text](image-8.png)
 
 📜 License
 

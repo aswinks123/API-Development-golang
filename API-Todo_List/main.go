@@ -96,7 +96,7 @@ func searchHandler(w http.ResponseWriter, r *http.Request) {
 	for _, todo := range todos {
 		if todo.ID == id {
 			w.Header().Set("Content-Type", "application/json")
-			json.NewEncoder(w).Encode(todos)
+			json.NewEncoder(w).Encode(todo)
 			return
 		}
 	}
