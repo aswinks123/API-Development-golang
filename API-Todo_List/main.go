@@ -132,10 +132,44 @@ func markCompleteHandler(w http.ResponseWriter, r *http.Request) {
 			//Respond with the updated list
 			w.Header().Set("Content-Type", "applicaion/json")
 			json.NewEncoder(w).Encode(todos[i])
-			fmt.Print("✅ Task Marked as Completed: %+v\n", todos[i])
+			fmt.Printf("✅ Task Marked as Completed: %+v\n", todos[i])
 			return
 		}
 	}
+}
+
+// delete handler function
+func deleteHandler(w http.ResponseWriter, r *http.Request) {
+	//check whether the method choosen is valid
+	if r.Method != http.MethodDelete {
+		http.Error(w, "Invalid. Only DELETE requests are alloweded", http.StatusMethodNotAllowed)
+		return
+	}
+	//extract the ID from the URL
+	pathParts := strings.Split(r.URL.Path, "/")
+	if len(pathParts) < 3 {
+		http.Error(w, "Invalid task ID", http.StatusBadRequest)
+		return
+	}
+	//convert the ID from string to interger
+	id, err := strconv.Atoi(pathParts[2])
+	if err != nil {
+		http.Error(w, "Invalid request: Task ID must be a number", http.StatusBadRequest)
+		return
+	}
+	//find and delete the todo using the ID
+	for i, todo := range todos {
+		if todo.ID == id {
+			todos = append(todos[:i], todos[i+1:]...) // Code to remove the task from the slice
+			w.WriteHeader(http.StatusOK)
+			fmt.Fprintf(w, "Task with ID %d deleted successfully", id)
+			fmt.Printf("Delete To-Do: %+v\n", todo)
+			return
+
+		}
+	}
+	http.Error(w, "Task not found", http.StatusNotFound)
+
 }
 
 func main() {
@@ -156,8 +190,11 @@ func main() {
 	//handler to search the To-Dos
 	http.HandleFunc("/search/", searchHandler)
 
-	//handler to mark a todo as completed
+	//handler to mark a To-Do as completed
 	http.HandleFunc("/complete/", markCompleteHandler)
+
+	//handler to delete a To-Do
+	http.HandleFunc("/delete/", deleteHandler)
 
 	// Start the server
 	fmt.Println("✅ Server is running at http://localhost:8080")
