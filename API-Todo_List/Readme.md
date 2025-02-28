@@ -147,8 +147,10 @@ Implement user authentication
 
 Create a more advanced frontend
 
+```go
 =============================================================================
 DEVELOPER: Aswin KS
 DATE: 26-02-2025
 ABOUT: Create a TO-Do list using GO, HTML and Javascript
 ===========================================================================
+```
