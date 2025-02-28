@@ -1,10 +1,10 @@
-To-Do List API
+# To-Do List API
 
-📌 Overview
+# 📌 Overview
 
 This project is a simple To-Do List API built using Go, HTML, and JavaScript. It provides basic functionalities to create, list, search, update (mark as completed), and delete tasks. The front end allows users to interact with the API using a simple web interface.
 
-🚀 Features
+# 🚀 Features
 
 Create new To-Do tasks ✅
 
@@ -16,9 +16,9 @@ Mark a task as completed 🏁
 
 Delete a task ❌
 
-📂 Project Structure
+# 📂 Project Structure
 
-![alt text](image.png)
+![alt text](./Images/image.png)
 
 todo-list-api
 ├── static/           # Frontend assets (HTML, JS, CSS)
@@ -27,7 +27,7 @@ todo-list-api
 ├── main.go           # Go backend API implementation
 ├── README.md         # Documentation
 
-🛠️ Setup and Installation
+# 🛠️ Setup and Installation
 
 Prerequisites
 
@@ -44,11 +44,11 @@ go run main.go
 3. Open your browser and go to:
 http://localhost:8080
 
-![alt text](image-1.png)
+![alt text](./Images/image-1.png)
 
 🔗 API Endpoints
 
-1️⃣ Create a New Task
+# 1️⃣ Create a New Task
 
 Endpoint: POST /create
 
@@ -68,10 +68,10 @@ Response:
   "completed": false
 }
 ```
-![alt text](image-2.png)
+![alt text](./Images/image-2.png)
 
 
-2️⃣ List All Tasks
+# 2️⃣ List All Tasks
 
 Endpoint: GET /list
 
@@ -85,10 +85,10 @@ Response:
   }
 ]
 ```
-![alt text](image-3.png)
+![alt text](./Images/image-3.png)
 
 
-3️⃣ Search for a Task by ID
+# 3️⃣ Search for a Task by ID
 
 Endpoint: GET /task/{id}
 
@@ -101,10 +101,10 @@ Response:
 }
 ```
 
-![alt text](image-4.png)
+![alt text](./Images/image-4.png)
 
 
-4️⃣ Mark a Task as Completed
+# 4️⃣ Mark a Task as Completed
 Endpoint: PUT /update/{id}
 
 Response:
@@ -116,11 +116,11 @@ Response:
 }
 ```
 
-![alt text](image-5.png)
+![alt text](./Images/image-5.png)
 
-![alt text](image-6.png)
+![alt text](./Images/image-6.png)
 
-5️⃣ Delete a Task
+# 5️⃣ Delete a Task
 
 Endpoint: DELETE /delete/{id}
 
@@ -131,11 +131,11 @@ Response:
 }
 ```
 
-![alt text](image-7.png)
+![alt text](./Images/image-7.png)
 
-![alt text](image-8.png)
+![alt text](./Images/image-8.png)
 
-📜 License
+# 📜 License
 
 This project is open-source and available under the MIT License. Feel free to modify and use it as needed.
 
@@ -146,3 +146,9 @@ Add database support (e.g., PostgreSQL, MySQL)
 Implement user authentication
 
 Create a more advanced frontend
+
+=============================================================================
+DEVELOPER: Aswin KS
+DATE: 26-02-2025
+ABOUT: Create a TO-Do list using GO, HTML and Javascript
+===========================================================================
