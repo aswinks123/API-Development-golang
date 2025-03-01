@@ -70,13 +70,20 @@ Error Responses:
 409 Conflict: Username already exists.
 
 ```
+
 Register a user
+
+
 ![alt text](./images/image-1.png)
 
 Add an existing user again
+
+
 ![alt text](./images/image-2.png)
 
 Choose wrong http Method
+
+
 ![alt text](./images/image-3.png)
 
 
@@ -94,9 +101,13 @@ Request Body:
 }
 ```
 Login Successful
+
+
 ![alt text](./images/image-4.png)
 
 Invalid login
+
+
 ![alt text](./images/image-5.png)
 
 Response:
