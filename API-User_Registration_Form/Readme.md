@@ -2,30 +2,23 @@
 
 # 📌 Overview
 
-This project is a simple To-Do List API built using Go, HTML, and JavaScript. It provides basic functionalities to create, list, search, update (mark as completed), and delete tasks. The front end allows users to interact with the API using a simple web interface.
+This is a user authentication API built in Go. 
+It allows users to register, log in, and manage their sessions using cookies. 
+The project uses an in-memory map to store user data and bcrypt for secure password hashing.
 
 # 🚀 Features
 
-Create new To-Do tasks ✅
+User Registration: Register a new user with a username and password.
 
-List all tasks 📋
+User Login: Log in with a username and password to receive a session cookie.
 
-Search for a specific task by ID 🔍
+Session Management: Uses cookies to manage user sessions.
 
-Mark a task as completed 🏁
-
-Delete a task ❌
+Secure Password Hashing: Passwords are hashed using bcrypt for secure storage.
 
 # 📂 Project Structure
 
-![alt text](./Images/image.png)
-
-todo-list-api
-├── static/           # Frontend assets (HTML, JS, CSS)
-│   ├── index.html    # Web interface for managing To-Dos
-│   ├── script.js     # JavaScript to interact with the API
-├── main.go           # Go backend API implementation
-├── README.md         # Documentation
+![alt text](./images/image.png)
 
 # 🛠️ Setup and Installation
 
@@ -44,96 +37,107 @@ go run main.go
 3. Open your browser and go to:
 http://localhost:8080
 
-![alt text](./Images/image-1.png)
 
 🔗 API Endpoints
 
-# 1️⃣ Create a New Task
+# 1️⃣ Register a User
 
-Endpoint: POST /create
+Endpoint: /register
+Method: POST
 
 Request Body:
 ```go
 {
-  "task": "Learn Go",
-  "completed": false
+  "username": "alice",
+  "password": "password123"
 }
 ```
 
 Response:
+
+```go
+
+Success Response:
+
+Status Code: 201 Created
+
+Body: User registered successfully
+
+Error Responses:
+
+400 Bad Request: Invalid input (e.g., missing username or password).
+
+409 Conflict: Username already exists.
+
+```
+Register a user
+![alt text](./images/image-1.png)
+
+Add an existing user again
+![alt text](./images/image-2.png)
+
+Choose wrong http Method
+![alt text](./images/image-3.png)
+
+
+# 2️⃣ Log In
+
+Endpoint: /login
+Method: POST
+
+Request Body:
+
 ```go
 {
- "id": 1,
-  "task": "Learn Go",
-  "completed": false
+  "username": "alice",
+  "password": "password123"
 }
 ```
-![alt text](./Images/image-2.png)
+Login Successful
+![alt text](./images/image-4.png)
 
-
-# 2️⃣ List All Tasks
-
-Endpoint: GET /list
+Invalid login
+![alt text](./images/image-5.png)
 
 Response:
 ```go
-[
-  {
-    "id": 1,
-    "task": "Learn Go",
-    "completed": false
-  }
-]
-```
-![alt text](./Images/image-3.png)
+Success Response:
+Status Code: 200 OK
 
+Body: Login successful
 
-# 3️⃣ Search for a Task by ID
+Cookie: A session cookie named session is set.
 
-Endpoint: GET /task/{id}
+Error Responses:
 
-Response:
-```go
-{
-  "id": 1,
-  "task": "Learn Go",
-  "completed": false
-}
+400 Bad Request: Invalid input (e.g., missing username or password).
+
+401 Unauthorized: Invalid credentials (e.g., incorrect username or password).
 ```
 
-![alt text](./Images/image-4.png)
+# Dependencies
 
+golang.org/x/crypto/bcrypt: For secure password hashing.
 
-# 4️⃣ Mark a Task as Completed
-Endpoint: PUT /update/{id}
+net/http: For handling HTTP requests and responses.
 
-Response:
-```go
-{
-  "id": 1,
-  "task": "Learn Go",
-  "completed": true
-}
-```
+sync: For concurrency safety using mutexes.
 
-![alt text](./Images/image-5.png)
+# Security Considerations
 
-![alt text](./Images/image-6.png)
+Password Hashing: Passwords are hashed using bcrypt, which is resistant to brute-force attacks.
 
-# 5️⃣ Delete a Task
+Session Cookies: Cookies are set with the HttpOnly and Secure flags for added security.
 
-Endpoint: DELETE /delete/{id}
+Concurrency Safety: A mutex is used to ensure safe access to the in-memory user store.
 
-Response:
-```go
-{
-  "message": "Task deleted successfully"
-}
-```
+# Limitations
 
-![alt text](./Images/image-7.png)
+In-Memory Storage: User data is stored in memory and will be lost when the server restarts. For production, use a database like PostgreSQL or MongoDB.
 
-![alt text](./Images/image-8.png)
+No Logout Mechanism: The current implementation does not include a logout feature. You can clear the session cookie on the client side to log out.
+
+No Rate Limiting: The API does not implement rate limiting, which could make it vulnerable to brute-force attacks.
 
 # 📜 License
 
@@ -141,16 +145,21 @@ This project is open-source and available under the MIT License. Feel free to mo
 
 💡 Future Enhancements
 
-Add database support (e.g., PostgreSQL, MySQL)
+Add a logout endpoint to clear the session cookie.
 
-Implement user authentication
+Implement rate limiting to prevent brute-force attacks.
 
-Create a more advanced frontend
+Use a database for persistent user storage.
+
+Add input validation for usernames and passwords (e.g., minimum length, allowed characters).
 
 ```go
+
 =============================================================================
 DEVELOPER: Aswin KS
-DATE: 26-02-2025
-ABOUT: Create a TO-Do list using GO, HTML and Javascript
+DATE: 01-03-2025
+ABOUT: Create login form API using Go
+Functions added: User Creation, User Authentication, Session Management
 ===========================================================================
+
 ```

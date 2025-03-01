@@ -20,12 +20,6 @@ Delete a task ❌
 
 ![alt text](./Images/image.png)
 
-todo-list-api
-├── static/           # Frontend assets (HTML, JS, CSS)
-│   ├── index.html    # Web interface for managing To-Dos
-│   ├── script.js     # JavaScript to interact with the API
-├── main.go           # Go backend API implementation
-├── README.md         # Documentation
 
 # 🛠️ Setup and Installation
 
