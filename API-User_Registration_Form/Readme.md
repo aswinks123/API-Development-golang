@@ -112,21 +112,6 @@ Invalid login
 
 ![alt text](./images/image-5.png)
 
-Response:
-```go
-Success Response:
-Status Code: 200 OK
-
-Body: Login successful
-
-Cookie: A session cookie named session is set.
-
-Error Responses:
-
-400 Bad Request: Invalid input (e.g., missing username or password).
-
-401 Unauthorized: Invalid credentials (e.g., incorrect username or password).
-```
 
 # Dependencies
 
