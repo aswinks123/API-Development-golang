@@ -43,6 +43,7 @@ http://localhost:8080
 # 1️⃣ Register a User
 
 Endpoint: /register
+
 Method: POST
 
 Request Body:
@@ -90,6 +91,7 @@ Choose wrong http Method
 # 2️⃣ Log In
 
 Endpoint: /login
+
 Method: POST
 
 Request Body:
